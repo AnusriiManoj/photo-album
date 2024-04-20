@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Album</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* CSS for styling the photo album */
+        body {
+            background-color: #d0d4d9;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .photo-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .photo {
+            margin: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .photo:hover {
+            transform: scale(1.05);
+        }
+        .photo img {
+            width:200px; /* Adjust the width to your desired size */
+            height:200px; /* Adjust the height to your desired size */
+            object-fit: cover; /* Maintain aspect ratio while filling the box */
+        }
+        .btn-group {
+            margin-top: 20px;
+        }
+        .btn-group button {
+            margin-right: 10px;
+        }
+        #imageCanvas {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+        }
+        #result {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: rgb(1, 1, 12);">Aquarium </h1>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/anu.jpg" alt="Photo 1">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/aquarium-fish.jpg" alt="Photo 2">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/black-moor-fish-feng-shui_0_1200.jpg" alt="Photo 3">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/ce4734ced08a2a722d7d50c42f45826f.jpg" alt="Photo 4">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/images (2).jpg" alt="Photo 5">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/images (3).jpg" alt="Photo 6">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/images.jpg" alt="Photo 7">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/ce4734ced08a2a722d7d50c42f45826f.jpg" alt="Photo 8">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/images.jpg" alt="Photo 9">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/koi-carp-aquarium-fish.jpg" alt="Photo 10">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/redish.jpg" alt="Photo 11">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="photo">
+                    <img src="./assets/main-qimg-4b2b4f34c8173b7ed77c68dd31d11e18-lq.jpg" alt="Photo 12">
+                </div>
+            
+        </div>
+    </div>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <canvas id="imageCanvas"></canvas>
+                <div class="btn-group" role="group">
+                    <button onclick="checkDominantColor()" class="btn btn-primary">Check Image Color</button>
+                    <button onclick="makeImageColor('red')" class="btn btn-danger">Make Reddish</button>
+                    <button onclick="makeImageColor('green')" class="btn btn-success">Make Greenish</button>
+                    <button onclick="makeImageColor('blue')" class="btn btn-primary">Make Blueish</button>
+                    <button onclick="duplicateImage()" class="btn btn-secondary">Duplicate Image</button>
+                    <button onclick="increaseBrightness()" class="btn btn-warning">Increase Brightness</button>
+                    <button onclick="reduceResolution()" class="btn btn-info">Reduce Resolution</button>
+                    <button onclick="createAvatar()" class="btn btn-primary">Create Avatar</button>
+                    <button onclick="rgbToGray()" class="btn btn-primary">Convert to Grayscale</button>
+                    <button onclick="generateQRCodeFromImage()" class="btn btn-primary">Generate QR Code from Image</button>
+                    <button onclick="createThumbnails()" class="btn btn-primary">Create Thumbnails</button>
+
+                </div>
+                <p id="result" class="mt-2"></p>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <button onclick="prevImage()" class="btn btn-secondary">Previous</button>
+                <button onclick="nextImage()" class="btn btn-secondary">Next</button>
+            </div>
+        </div>
+    </div>
+    <script src="imageProcessing.js"></script>
+
+</body>
+</html>
